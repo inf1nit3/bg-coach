@@ -14,11 +14,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <header className="site-header">
           <div className="container header-inner">
-            <a href="/" className="brand">
+            <Link href="/" className="brand" aria-label="BG Coach Home">
               <span className="brand-mark">BG</span>
               <span className="brand-name">Coach</span>
-            </a>
-            <nav className="nav">
+            </Link>
+            <nav className="nav" aria-label="Main Navigation">
               <Link href="/anomalies">Anomalien</Link>
               <Link href="/quests">Quests</Link>
               <Link href="/heroes">Heroes</Link>

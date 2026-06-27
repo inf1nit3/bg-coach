@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState, useMemo, useEffect } from "react";
 import { getAllMinions } from "@/lib/minions";
 import {
@@ -95,7 +96,7 @@ export default function TripleEvClient() {
             return (
               <div key={i} className={`board-card ${b.golden ? "golden" : ""}`}>
                 {m.picture && (
-                  <img
+                  <Image
                     src={m.picture}
                     alt={m.name}
                     width={32}
