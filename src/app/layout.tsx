@@ -20,6 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <nav className="nav">
               <a href="/anomalies">Anomalien</a>
               <a href="/quests">Quests</a>
+              <a href="/heroes">Heroes</a>
               <a href="/pool">Pool-Counter</a>
               <a href="/triple-ev">Triple-EV</a>
             </nav>

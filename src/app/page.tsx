@@ -33,6 +33,16 @@ export default function Home() {
         <div className="feature">
           <span className="feature-status feature-status-live">● Live</span>
           <div className="feature-title">
+            <Link href="/heroes">Hero Tier-Liste</Link>
+          </div>
+          <p className="card-desc">
+            111 BG-Heroes mit Tier-Bewertung pro MMR-Bucket. Filter nach
+            Comp-Tribe und deiner Spielstärke.
+          </p>
+        </div>
+        <div className="feature">
+          <span className="feature-status feature-status-live">● Live</span>
+          <div className="feature-title">
             <Link href="/pool">Pool-Counter</Link>
           </div>
           <p className="card-desc">
