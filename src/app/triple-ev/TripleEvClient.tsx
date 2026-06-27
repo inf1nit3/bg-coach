@@ -8,29 +8,21 @@ import {
   type TripleResult,
   type BoardPair,
 } from "@/lib/triple-ev";
-import type { PoolCounterState, BoardEntry } from "@/lib/pool-counter";
-import { loadState } from "@/lib/pool-counter";
+import type { BoardEntry } from "@/lib/pool-counter";
+import type { Minion } from "@/lib/minions";
 
-const MINIONS = getAllMinions();
+// Statische Modul-Scope-Daten: sortiert einmalig beim Import, nicht pro Render.
+const MINIONS: Minion[] = getAllMinions();
 
 export default function TripleEvClient() {
+  // Triple-EV hat eigene Board-State — entkoppelt von Pool-Counter localStorage
+  // (User kann beide unabhängig nutzen ohne Cross-Page-Korruption).
   const [board, setBoard] = useState<BoardEntry[]>([]);
   const [tavernTier, setTavernTier] = useState(3);
   const [compTribeLocked, setCompTribeLocked] = useState(false);
   const [anomalyBoostsTriple, setAnomalyBoostsTriple] = useState(false);
   const [discoverTierBonus, setDiscoverTierBonus] = useState(0);
   const [pairSelection, setPairSelection] = useState<string>("");
-  const [hydrated, setHydrated] = useState(false);
-
-  // Optional: Board aus Pool-Counter übernehmen
-  useEffect(() => {
-    const saved = loadState();
-    if (saved) {
-      setBoard(saved.board);
-      setTavernTier(saved.tavernTier);
-    }
-    setHydrated(true);
-  }, []);
 
   const pairs = useMemo(() => detectPairs(board, MINIONS), [board]);
 

@@ -4,6 +4,8 @@ import { useState, useMemo } from "react";
 import { getAllAnomalies } from "@/lib/anomalies";
 import { ALL_TRIBES, type MMRBucket } from "@/lib/types";
 
+const ANOMALIES = getAllAnomalies();
+
 const MMR_OPTIONS: { value: MMRBucket; label: string }[] = [
   { value: "low", label: "Low (BGS 0-4000)" },
   { value: "mid", label: "Mid (BGS 4000-7000)" },
@@ -11,13 +13,12 @@ const MMR_OPTIONS: { value: MMRBucket; label: string }[] = [
 ];
 
 export default function AnomaliesClient() {
-  const allAnomalies = getAllAnomalies();
   const [tribeFilter, setTribeFilter] = useState<string>("All");
   const [mmrFilter, setMmrFilter] = useState<MMRBucket | "all">("all");
   const [search, setSearch] = useState("");
 
   const filtered = useMemo(() => {
-    return allAnomalies.filter((a) => {
+    return ANOMALIES.filter((a) => {
       // Tribe-Filter: zeige Anomalie wenn sie den Tribe pusht oder schwächt
       if (
         tribeFilter !== "All" &&
@@ -36,7 +37,7 @@ export default function AnomaliesClient() {
       }
       return true;
     });
-  }, [allAnomalies, tribeFilter, mmrFilter, search]);
+  }, [tribeFilter, mmrFilter, search]);
 
   return (
     <>
@@ -73,7 +74,7 @@ export default function AnomaliesClient() {
           ))}
         </select>
         <span className="filter-count">
-          {filtered.length} / {allAnomalies.length}
+          {filtered.length} / {ANOMALIES.length}
         </span>
       </div>
 

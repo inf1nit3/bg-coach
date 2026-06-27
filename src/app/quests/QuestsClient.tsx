@@ -6,23 +6,22 @@ import { getQuestWinrate, WINRATE_META } from "@/lib/winrates";
 import { ALL_TRIBES, type Tier } from "@/lib/types";
 
 const TIERS: Tier[] = ["S", "A", "B", "C", "D"];
+const QUESTS = getAllQuests().map((q) => {
+  const wr = getQuestWinrate(q.id);
+  return {
+    ...q,
+    topFourRate: wr?.top4 ?? q.topFourRate,
+    topOneRate: wr?.top1 ?? q.topOneRate,
+  };
+});
 
 export default function QuestsClient() {
-  const allQuests = getAllQuests();
   const [tribeFilter, setTribeFilter] = useState<string>("All");
   const [tierFilter, setTierFilter] = useState<Tier | "all">("all");
   const [search, setSearch] = useState("");
 
   const filtered = useMemo(() => {
-    return allQuests.map((q) => {
-      // Falls winrates.json einen Eintrag hat, überschreibe die hardcoded Werte
-      const wr = getQuestWinrate(q.id);
-      return {
-        ...q,
-        topFourRate: wr?.top4 ?? q.topFourRate,
-        topOneRate: wr?.top1 ?? q.topOneRate,
-      };
-    }).filter((q) => {
+    return QUESTS.filter((q) => {
       if (tribeFilter !== "All" && !q.favoredTribes.includes(tribeFilter as never)) {
         return false;
       }
@@ -34,7 +33,7 @@ export default function QuestsClient() {
       }
       return true;
     });
-  }, [allQuests, tribeFilter, tierFilter, search]);
+  }, [tribeFilter, tierFilter, search]);
 
   return (
     <>
@@ -71,7 +70,7 @@ export default function QuestsClient() {
           ))}
         </select>
         <span className="filter-count">
-          {filtered.length} / {allQuests.length}
+          {filtered.length} / {QUESTS.length}
         </span>
       </div>
 

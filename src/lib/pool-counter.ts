@@ -108,13 +108,17 @@ export function computePoolCounters(
       // Discover gibt eine Kopie aus dem höheren Tier — zählt als gezogen
       drawn[entry.discovered] = (drawn[entry.discovered] ?? 0) + 1;
     }
+    if (entry.sold) {
+      // Verkaufte Kopie geht zurück in den Pool → Drain reduzieren
+      drawn[entry.sold] = (drawn[entry.sold] ?? 0) - 1;
+    }
   }
 
-  // 2. Player-Has (aktuell auf Board + verkauft-rück-into-pool)
+  // 2. Player-Has: Goldenes Minion = 1 Slot (nicht N Kopien).
   const has: Record<string, number> = {};
   for (const m of minions) has[m.id] = 0;
   for (const b of state.board) {
-    const copies = b.golden ? b.copies : b.copies;
+    const copies = b.golden ? 1 : b.copies;
     has[b.minionId] = (has[b.minionId] ?? 0) + copies;
   }
 
