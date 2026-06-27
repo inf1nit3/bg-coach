@@ -41,8 +41,10 @@ export default function Home() {
           </p>
         </div>
         <div className="feature">
-          <span className="feature-status feature-status-soon">○ Bald</span>
-          <div className="feature-title">Triple-EV Helper</div>
+          <span className="feature-status feature-status-live">● Live</span>
+          <div className="feature-title">
+            <Link href="/triple-ev">Triple-EV Helper</Link>
+          </div>
           <p className="card-desc">
             Triple jetzt oder Hold? Pre-Combat-Empfehlung mit
             Discover-Pool-Modell.

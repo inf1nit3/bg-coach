@@ -21,7 +21,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <a href="/anomalies">Anomalien</a>
               <a href="/quests">Quests</a>
               <a href="/pool">Pool-Counter</a>
-              <span className="nav-soon">Triple-EV (bald)</span>
+              <a href="/triple-ev">Triple-EV</a>
             </nav>
           </div>
         </header>

@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { getAllQuests, ALL_TRIBES } from "@/lib/quests";
-import type { Tier } from "@/lib/types";
+import { getAllQuests } from "@/lib/quests";
+import { getQuestWinrate, WINRATE_META } from "@/lib/winrates";
+import { ALL_TRIBES, type Tier } from "@/lib/types";
 
 const TIERS: Tier[] = ["S", "A", "B", "C", "D"];
 
@@ -13,7 +14,15 @@ export default function QuestsClient() {
   const [search, setSearch] = useState("");
 
   const filtered = useMemo(() => {
-    return allQuests.filter((q) => {
+    return allQuests.map((q) => {
+      // Falls winrates.json einen Eintrag hat, überschreibe die hardcoded Werte
+      const wr = getQuestWinrate(q.id);
+      return {
+        ...q,
+        topFourRate: wr?.top4 ?? q.topFourRate,
+        topOneRate: wr?.top1 ?? q.topOneRate,
+      };
+    }).filter((q) => {
       if (tribeFilter !== "All" && !q.favoredTribes.includes(tribeFilter as never)) {
         return false;
       }
@@ -66,6 +75,11 @@ export default function QuestsClient() {
         </span>
       </div>
 
+      <p className="data-meta">
+        Datenstand: Patch <strong>{WINRATE_META.patch}</strong> · Aktualisiert:{" "}
+        {WINRATE_META.lastUpdated} · Quelle: {WINRATE_META.source}
+      </p>
+
       <div className="grid">
         {filtered.map((q) => (
           <article key={q.id} className="card">
@@ -110,10 +124,9 @@ export default function QuestsClient() {
 
       <h2>Hinweis zu den Winrates</h2>
       <p className="lead">
-        Die Top-4/Top-1-Raten sind grobe Schätzungen basierend auf
-        Community-Konsens und HSReplay-Snapshots. Bei neuem Patch können sich
-        die Werte innerhalb von 48 Stunden verschieben.{" "}
-        <strong>Daten sind Entscheidungshilfe, keine Garantie.</strong>
+        Winrates stammen aus manuell kuratierten Daten (Community-Konsens aus r/BobsTavern
+        + HSReplay-Public-Snapshots). Bei neuem Patch können sich die Werte innerhalb
+        von 48 Stunden verschieben. <strong>Daten sind Entscheidungshilfe, keine Garantie.</strong>
       </p>
     </>
   );

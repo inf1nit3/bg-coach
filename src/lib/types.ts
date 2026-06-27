@@ -12,6 +12,20 @@ export type Tribe =
   | "Pirates"
   | "All";
 
+export const ALL_TRIBES = [
+  "Beasts",
+  "Mechs",
+  "Demons",
+  "Dragons",
+  "Undead",
+  "Nagasy",
+  "Elementals",
+  "Quilboar",
+  "Murlocs",
+  "Pirates",
+  "All",
+] as const;
+
 export type Tier = "S" | "A" | "B" | "C" | "D";
 
 /** MMR-Bucket für differenzierte Bewertung. */

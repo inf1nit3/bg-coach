@@ -195,17 +195,3 @@ export function getAllQuests(): Quest[] {
   const tierOrder = { S: 0, A: 1, B: 2, C: 3, D: 4 };
   return [...QUESTS].sort((a, b) => tierOrder[a.tier] - tierOrder[b.tier]);
 }
-
-export const ALL_TRIBES = [
-  "Beasts",
-  "Mechs",
-  "Demons",
-  "Dragons",
-  "Undead",
-  "Nagasy",
-  "Elementals",
-  "Quilboar",
-  "Murlocs",
-  "Pirates",
-  "All",
-] as const;

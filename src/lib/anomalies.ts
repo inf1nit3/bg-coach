@@ -211,17 +211,3 @@ export function getAnomaliesForTribe(tribe: string): Anomaly[] {
     (a) => a.strongTribes.some((st) => st.tribe === tribe) || a.weakTribes.includes(tribe as never)
   );
 }
-
-export const ALL_TRIBES = [
-  "Beasts",
-  "Mechs",
-  "Demons",
-  "Dragons",
-  "Undead",
-  "Nagasy",
-  "Elementals",
-  "Quilboar",
-  "Murlocs",
-  "Pirates",
-  "All",
-] as const;

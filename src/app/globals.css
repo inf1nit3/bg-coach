@@ -115,6 +115,16 @@ a:hover {
   cursor: not-allowed;
 }
 
+.data-meta {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  margin-bottom: 1rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--bg-elev);
+  border-radius: var(--radius);
+  border-left: 3px solid var(--accent-dim);
+}
+
 .filter-bar {
   display: flex;
   flex-wrap: wrap;
@@ -519,6 +529,111 @@ h2 {
 }
 .feature-status-soon {
   color: var(--text-muted);
+}
+
+.triple-result {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left-width: 4px;
+  border-radius: var(--radius-lg);
+  padding: 1.1rem 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.triple-headline {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 0.85rem;
+  letter-spacing: -0.01em;
+}
+
+.triple-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  padding: 0.75rem 0.9rem;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.triple-stats > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.triple-stats .winrate {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.triple-stats strong {
+  font-size: 1.1rem;
+  color: var(--text);
+}
+
+.triple-stats strong.positive {
+  color: #6fcf75;
+}
+
+.triple-stats strong.negative {
+  color: #d97a7a;
+}
+
+.triple-reason {
+  color: var(--text-dim);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  margin-bottom: 0;
+}
+
+.triple-formula {
+  margin-top: 0.75rem;
+  padding: 0.75rem 0.9rem;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  white-space: pre-wrap;
+  word-break: break-word;
+  line-height: 1.55;
+}
+
+.triple-TRIPLE {
+  border-left-color: #6fcf75;
+}
+
+.triple-TRIPLE .triple-headline strong {
+  color: #6fcf75;
+}
+
+.triple-HOLD {
+  border-left-color: #d97a7a;
+}
+
+.triple-HOLD .triple-headline strong {
+  color: #d97a7a;
+}
+
+.triple-TRIPLE_LATER {
+  border-left-color: #b8860b;
+}
+
+.triple-TRIPLE_LATER .triple-headline strong {
+  color: #f0b232;
+}
+
+@media (max-width: 600px) {
+  .triple-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

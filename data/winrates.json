@@ -1,0 +1,27 @@
+{
+  "_comment_top": "Manually curated Quest/Hero Winrates. Top-4/Top-1 in Prozent. Quelle: HSReplay-Community-Konsens + eigene Spielerfahrung. Pflege: nach jedem Patch manuell reviewen.",
+  "patch": "27.6",
+  "lastUpdated": "2026-06-27",
+  "source": "Manually curated (HSReplay paywall)",
+  "quests": {
+    "battlecry-bragging-rights": { "top4": 62, "top1": 18 },
+    "arcane-conduit": { "top4": 60, "top1": 17 },
+    "apex-predator": { "top4": 58, "top1": 16 },
+    "tavern-tourist": { "top4": 55, "top1": 14 },
+    "blood-rage": { "top4": 54, "top1": 15 },
+    "elemental-conduit": { "top4": 52, "top1": 12 },
+    "reborn-rite": { "top4": 51, "top1": 13 },
+    "magnetic-pull": { "top4": 48, "top1": 11 },
+    "discovery-master": { "top4": 49, "top1": 12 },
+    "dragon-roar": { "top4": 47, "top1": 11 },
+    "endless-tide": { "top4": 46, "top1": 10 },
+    "beast-bond": { "top4": 46, "top1": 10 },
+    "quilboar-armada": { "top4": 45, "top1": 10 },
+    "pirate-plunder": { "top4": 44, "top1": 9 },
+    "discovery-discover": { "top4": 44, "top1": 9 },
+    "card-trader": { "top4": 42, "top1": 8 }
+  },
+  "heroes": {
+    "placeholder": { "top4": 50, "top1": 12 }
+  }
+}

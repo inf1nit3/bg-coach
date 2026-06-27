@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { getAllAnomalies, ALL_TRIBES } from "@/lib/anomalies";
-import type { MMRBucket } from "@/lib/types";
+import { getAllAnomalies } from "@/lib/anomalies";
+import { ALL_TRIBES, type MMRBucket } from "@/lib/types";
 
 const MMR_OPTIONS: { value: MMRBucket; label: string }[] = [
   { value: "low", label: "Low (BGS 0-4000)" },
