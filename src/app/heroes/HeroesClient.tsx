@@ -116,28 +116,44 @@ export default function HeroesClient() {
         zu sehen.
       </p>
 
-      <div className="grid">
+      <div className="grid grid-hero">
         {filtered.map((h) => (
-          <article key={h.id} className={`card ${!h.hasTierEntry ? "card-dim" : ""}`}>
+          <article
+            key={h.id}
+            className={`card card-hero ${!h.hasTierEntry ? "card-dim" : ""} ${h.tier ? `card-tier-${h.tier}` : ""}`}
+          >
             <div className="card-head">
-              {h.picture && (
-                <img
-                  src={h.picture}
-                  alt={h.name}
-                  width={56}
-                  height={56}
-                  className="card-art"
-                />
+              {h.picturePortrait && (
+                <div className="card-art-wrapper">
+                  <img
+                    src={h.picturePortrait}
+                    alt={h.name}
+                    className="card-art"
+                    loading="lazy"
+                  />
+                  {h.pictureWhole && (
+                    <img
+                      src={h.pictureWhole}
+                      alt=""
+                      className="card-art-hover"
+                      loading="lazy"
+                    />
+                  )}
+                </div>
               )}
-              <div className="card-title">
-                {h.name}
-                {h.nameShort && (
-                  <span className="hero-short"> ({h.nameShort})</span>
-                )}
+              <div className="card-title-block">
+                <div className="card-title-row">
+                  <div className="card-title">
+                    {h.name}
+                    {h.nameShort && (
+                      <span className="hero-short"> ({h.nameShort})</span>
+                    )}
+                  </div>
+                  {h.tier && (
+                    <span className={`tier-badge tier-${h.tier}`}>{h.tier}</span>
+                  )}
+                </div>
               </div>
-              {h.tier && (
-                <span className={`tier-badge tier-${h.tier}`}>{h.tier}</span>
-              )}
             </div>
             <p className="card-desc">{h.heroPowerText || "—"}</p>
 
