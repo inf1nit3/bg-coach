@@ -176,10 +176,52 @@ export function loadState(): PoolCounterState | null {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return null;
-    return JSON.parse(raw) as PoolCounterState;
+    const parsed = JSON.parse(raw);
+    if (!isPoolCounterState(parsed)) return null;
+    return parsed;
   } catch {
     return null;
   }
+}
+
+/**
+ * Minimal hand-rolled Validator für PoolCounterState aus LocalStorage.
+ * Schützt vor korrupten/alten Payloads (Schema-Drift nach Deploys).
+ */
+function isPoolCounterState(x: unknown): x is PoolCounterState {
+  if (!x || typeof x !== "object") return false;
+  const s = x as Partial<PoolCounterState> & {
+    board?: unknown;
+    shopLog?: unknown;
+    turn?: unknown;
+    tavernTier?: unknown;
+  };
+  if (typeof s.hero !== "string") return false;
+  if (
+    typeof s.tavernTier !== "number" ||
+    ![1, 2, 3, 4, 5, 6, 7].includes(s.tavernTier)
+  ) {
+    return false;
+  }
+  if (typeof s.turn !== "number") return false;
+  if (!Array.isArray(s.board)) return false;
+  if (!Array.isArray(s.shopLog)) return false;
+  if (typeof s.anomaly !== "string") return false;
+  if (typeof s.patch !== "string") return false;
+  for (const b of s.board) {
+    if (!b || typeof b !== "object") return false;
+    const entry = b as Partial<BoardEntry>;
+    if (typeof entry.minionId !== "string") return false;
+    if (typeof entry.golden !== "boolean") return false;
+    if (typeof entry.copies !== "number") return false;
+  }
+  for (const log of s.shopLog) {
+    if (!log || typeof log !== "object") return false;
+    const entry = log as Partial<ShopLogEntry>;
+    if (typeof entry.turn !== "number") return false;
+    if (!Array.isArray(entry.offered)) return false;
+  }
+  return true;
 }
 
 export function clearState(): void {

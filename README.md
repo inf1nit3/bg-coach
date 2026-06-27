@@ -30,7 +30,7 @@ npm run typecheck
 
 ## Stack
 
-- **Next.js 14** (App Router, Static Export)
+- **Next.js 14** (App Router)
 - **TypeScript** (strict)
 - **CSS Variables** (kein Framework, dunkles Theme, `prefers-reduced-motion`-aware)
 
@@ -82,13 +82,19 @@ src/
 │   ├── globals.css       # Theme + Components
 │   ├── anomalies/        # Anomalie-Matrix mit Filter
 │   ├── quests/           # Quest Tier-List mit Filter
-│   └── pool/             # Pool-Counter (manuell + Triangulation)
+│   ├── pool/             # Pool-Counter (manuell + Triangulation)
+│   ├── heroes/           # Hero Tier-List mit Tier-Overlay
+│   └── triple-ev/        # Triple-EV Decision Helper
 └── lib/
     ├── types.ts          # Domain-Types (Tribe, Tier, Anomaly, Quest, Minion)
     ├── anomalies.ts      # Anomalie-DB + Helpers
     ├── quests.ts         # Quest-DB + Helpers
-    ├── minions.ts        # Minion-DB (handkuratiert, 130+ Minions Tier 1-6)
-    └── pool-counter.ts   # Triangulations-Engine + LocalStorage
+    ├── minions.ts        # Minion-DB (1144 echte BG-Minions aus HearthstoneJSON)
+    ├── heroes.ts         # Hero-DB
+    ├── hero-tiers.ts     # Hero-Tier-Overlay (Top-20)
+    ├── pool-counter.ts   # Triangulations-Engine + LocalStorage
+    ├── triple-ev.ts      # Triple-EV Decision Helper
+    └── winrates.ts       # Winrate-Referenzdaten
 ```
 
 ## Disclaimer

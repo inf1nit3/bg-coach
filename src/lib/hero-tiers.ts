@@ -52,7 +52,7 @@ export interface HeroTierEntry {
 export const HERO_TIERS: HeroTierEntry[] = [
   // ---- S-Tier ----
   {
-    heroId: "TB_BaconShop_HERO_36", // Sire Denathrius
+    heroId: "BG24_HERO_100", // Sire Denathrius
     mmrRatings: {
       low: [{ tribe: "All", tier: "S", reason: "Stats-Bonus skaliert linear, kein Skill erforderlich" }],
       mid: [{ tribe: "All", tier: "S", reason: "Meta-definierend, hohe Contest-Rate" }],
@@ -65,7 +65,7 @@ export const HERO_TIERS: HeroTierEntry[] = [
     notes: "Auto-Pick wenn verfügbar. Lobbys ohne ihn sind deutlich einfacher.",
   },
   {
-    heroId: "TB_BaconShop_HERO_42", // Patches the Pirate
+    heroId: "TB_BaconShop_HERO_18", // Patches the Pirate
     mmrRatings: {
       low: [{ tribe: "All", tier: "A", reason: "Free-Rerolls gut, aber Spam-fähig nur bei Tempo" }],
       mid: [{ tribe: "Pirates", tier: "S", reason: "Pirates-Comp trifft sich auf freie Rerolls" }],
@@ -78,7 +78,7 @@ export const HERO_TIERS: HeroTierEntry[] = [
     notes: "Comp-locked für volle Stärke. Free-Rerolls skalieren mit Aggression.",
   },
   {
-    heroId: "TB_BaconShop_HERO_39", // Sneed
+    heroId: "BG21_HERO_030", // Sneed
     mmrRatings: {
       low: [{ tribe: "Mechs", tier: "A", reason: "Mech-Comp skaliert mit Tier-Discover" }],
       mid: [{ tribe: "Mechs", tier: "S", reason: "Auto-Pick für Mech-Comp" }],
@@ -106,20 +106,18 @@ export const HERO_TIERS: HeroTierEntry[] = [
     notes: "Generisch stark. Buddy-Boards skalieren mit Board-Quality.",
   },
   {
-    heroId: "TB_BaconShop_HERO_28", // Death Speaker Anthia
+    heroId: "TB_BaconShop_HERO_28", // Death Speaker Anthia (removed from pool — not in heroes.ts)
     mmrRatings: {
-      low: [{ tribe: "Undead", tier: "A", reason: "Reborn-Effekt einfach zu verstehen" }],
-      mid: [{ tribe: "Undead", tier: "A", reason: "Comp-definierend für Undead-Comp" }],
-      high: [{ tribe: "Undead", tier: "A", reason: "Hohe Contest-Rate unter Top-Spielern" }],
+      low: [{ tribe: "Undead", tier: "C", reason: "removed from pool" }],
+      mid: [{ tribe: "Undead", tier: "C", reason: "removed from pool" }],
+      high: [{ tribe: "Undead", tier: "C", reason: "removed from pool" }],
     },
-    topFourRate: 54,
-    topOneRate: 14,
     lastReviewed: "2026-06-27",
     patch: "27.6",
-    notes: "Undead-Comp auto-pick. Comp-locked.",
+    notes: "removed from pool",
   },
   {
-    heroId: "TB_BaconShop_HERO_43", // Yogg-Saron
+    heroId: "TB_BaconShop_HERO_35", // Yogg-Saron, Hope's End
     mmrRatings: {
       low: [{ tribe: "All", tier: "B", reason: "RNG-abhängig, schwer zu planen" }],
       mid: [{ tribe: "All", tier: "A", reason: "Mid-MMR hat Glück oft" }],
@@ -158,7 +156,7 @@ export const HERO_TIERS: HeroTierEntry[] = [
     notes: "Skill-intensive. Erfordert Game-Sense wann geswappt wird.",
   },
   {
-    heroId: "TB_BaconShop_HERO_55", // Tess Greymane
+    heroId: "TB_BaconShop_HERO_50", // Tess Greymane
     mmrRatings: {
       low: [{ tribe: "All", tier: "B", reason: "Discover-Planning für Low-MMR schwer" }],
       mid: [{ tribe: "All", tier: "A", reason: "Discover-Combos gut in Mid" }],
@@ -173,7 +171,7 @@ export const HERO_TIERS: HeroTierEntry[] = [
 
   // ---- B-Tier ----
   {
-    heroId: "TB_BaconShop_HERO_94", // Ini Stormcoil
+    heroId: "BG22_HERO_200", // Ini Stormcoil
     mmrRatings: {
       low: [{ tribe: "Mechs", tier: "B", reason: "Mech-Comp OK, aber nicht comp-definierend" }],
       mid: [{ tribe: "Mechs", tier: "B", reason: "Solides Mech-Support" }],
@@ -186,7 +184,7 @@ export const HERO_TIERS: HeroTierEntry[] = [
     notes: "Comp-locked Mech. Mid-tier.",
   },
   {
-    heroId: "TB_BaconShop_HERO_46", // Millhouse Manastorm
+    heroId: "TB_BaconShop_HERO_49", // Millhouse Manastorm
     mmrRatings: {
       low: [{ tribe: "All", tier: "C", reason: "Hoher Gold-Verlust riskant für Low-MMR" }],
       mid: [{ tribe: "All", tier: "B", reason: "Comp-Player kompensieren mit Tempo" }],
@@ -199,7 +197,7 @@ export const HERO_TIERS: HeroTierEntry[] = [
     notes: "Hohe Skill-Expression. Anfänger-Risiko.",
   },
   {
-    heroId: "TB_BaconShop_HERO_75", // Tickatus
+    heroId: "TB_BaconShop_HERO_94", // Tickatus
     mmrRatings: {
       low: [{ tribe: "Demons", tier: "B", reason: "Demons-Comp skaliert mit Stats" }],
       mid: [{ tribe: "Demons", tier: "B", reason: "Comp-Support für Demons" }],
@@ -212,7 +210,7 @@ export const HERO_TIERS: HeroTierEntry[] = [
     notes: "Comp-locked. Solid nicht broken.",
   },
   {
-    heroId: "TB_BaconShop_HERO_58", // Elise Starseeker
+    heroId: "TB_BaconShop_HERO_42", // Elise Starseeker
     mmrRatings: {
       low: [{ tribe: "All", tier: "B", reason: "Discover-Stacking OK" }],
       mid: [{ tribe: "All", tier: "B", reason: "Tempo-freundlich" }],
@@ -225,7 +223,7 @@ export const HERO_TIERS: HeroTierEntry[] = [
     notes: "Discover-Comp. Mid-tier.",
   },
   {
-    heroId: "TB_BaconShop_HERO_71", // Curator
+    heroId: "TB_BaconShop_HERO_33", // The Curator
     mmrRatings: {
       low: [{ tribe: "All", tier: "B", reason: "Free-Tier-1 OK" }],
       mid: [{ tribe: "All", tier: "B", reason: "Solides Budget" }],
@@ -240,7 +238,7 @@ export const HERO_TIERS: HeroTierEntry[] = [
 
   // ---- C/D-Tier ----
   {
-    heroId: "TB_BaconShop_HERO_52", // Queen Wagtoggle
+    heroId: "TB_BaconShop_HERO_14", // Queen Wagtoggle
     mmrRatings: {
       low: [{ tribe: "All", tier: "C", reason: "Situationsabhängig" }],
       mid: [{ tribe: "All", tier: "C", reason: "Skill-intensive" }],

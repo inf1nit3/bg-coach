@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from "react";
 import { getAllAnomalies } from "@/lib/anomalies";
-import { ALL_TRIBES, type MMRBucket } from "@/lib/types";
+import { ALL_TRIBES, type MMRBucket, type Tribe } from "@/lib/types";
 
 const ANOMALIES = getAllAnomalies();
 
@@ -13,7 +13,7 @@ const MMR_OPTIONS: { value: MMRBucket; label: string }[] = [
 ];
 
 export default function AnomaliesClient() {
-  const [tribeFilter, setTribeFilter] = useState<string>("All");
+  const [tribeFilter, setTribeFilter] = useState<Tribe | "All">("All");
   const [mmrFilter, setMmrFilter] = useState<MMRBucket | "all">("all");
   const [search, setSearch] = useState("");
 
@@ -23,13 +23,13 @@ export default function AnomaliesClient() {
       if (
         tribeFilter !== "All" &&
         !a.strongTribes.some((st) => st.tribe === tribeFilter) &&
-        !a.weakTribes.includes(tribeFilter as never)
+        !a.weakTribes.includes(tribeFilter)
       ) {
         return false;
       }
-      // MMR-Filter
+      // MMR-Filter: zeige nur Anomalien, die für das gewählte MMR eine Notiz haben
       if (mmrFilter !== "all" && !a.mmrNotes?.[mmrFilter]) {
-        // Anomalie ohne MMR-Notiz trotzdem zeigen — nur als Hinweis
+        return false;
       }
       // Search
       if (search && !a.name.toLowerCase().includes(search.toLowerCase())) {
@@ -52,7 +52,7 @@ export default function AnomaliesClient() {
         <select
           className="filter-select"
           value={tribeFilter}
-          onChange={(e) => setTribeFilter(e.target.value)}
+          onChange={(e) => setTribeFilter(e.target.value as Tribe | "All")}
         >
           <option value="All">Alle Tribes</option>
           {ALL_TRIBES.filter((t) => t !== "All").map((t) => (

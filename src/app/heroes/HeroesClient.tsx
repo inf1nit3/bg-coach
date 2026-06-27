@@ -2,10 +2,12 @@
 
 import { useState, useMemo } from "react";
 import { getAllHeroes } from "@/lib/heroes";
-import { getHeroTierEntry } from "@/lib/hero-tiers";
+import { getHeroTiers } from "@/lib/hero-tiers";
 import { ALL_TRIBES, type MMRBucket, type Tier } from "@/lib/types";
 
 const HEROES = getAllHeroes();
+// O(1) Lookup-Map statt O(n) pro Hero pro Render
+const TIER_BY_ID = new Map(getHeroTiers().map((t) => [t.heroId, t]));
 
 const MMR_OPTIONS: { value: MMRBucket; label: string }[] = [
   { value: "low", label: "Low (BGS 0-4000)" },
@@ -24,7 +26,7 @@ export default function HeroesClient() {
   // Build enriched view: alle 111 Heroes + Tier-Overlay wenn vorhanden
   const enriched = useMemo(() => {
     return HEROES.map((h) => {
-      const tierEntry = getHeroTierEntry(h.id);
+      const tierEntry = TIER_BY_ID.get(h.id);
       const mmrRating = tierEntry?.mmrRatings[mmrFilter === "all" ? "mid" : mmrFilter]?.[0];
       return {
         ...h,

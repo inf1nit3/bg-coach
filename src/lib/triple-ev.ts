@@ -23,8 +23,6 @@ export interface TripleInput {
   tavernTier: number;
   /** Minion das getriplet werden soll. */
   pairMinion: Minion;
-  /** Aktuelle Board-Strength (summe Angriff+Health aller Minions). */
-  boardStrength: number;
   /** Comp-Plan: tribe-locked = false → flexibel. */
   compTribeLocked: boolean;
   /** Anomalie die Triple boost (z.B. "Arcane Fortune" für Triple-freq). */
@@ -58,7 +56,7 @@ export interface TripleResult {
  * Discover-EV ist eine grobe Schätzung basierend auf Tier (höheres Tier = stärkere Minions).
  */
 export function computeTripleEV(input: TripleInput): TripleResult {
-  const { tavernTier, pairMinion, boardStrength, compTribeLocked, anomalyBoostsTriple, discoverTierBonus = 0 } = input;
+  const { tavernTier, pairMinion, compTribeLocked, anomalyBoostsTriple, discoverTierBonus = 0 } = input;
 
   const baseDiscoverTier = Math.min(7, tavernTier + 1);
   const discoverTier = Math.min(7, baseDiscoverTier + (discoverTierBonus ?? 0));

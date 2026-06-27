@@ -25,15 +25,25 @@ export default function PoolCounterClient() {
     setHydrated(true);
   }, []);
 
-  // Auto-save on change
+  // Verhindere Save-Race: erst nach Hydration persistieren
   useEffect(() => {
-    if (hydrated) saveState(state);
+    if (!hydrated) return;
+    saveState(state);
   }, [state, hydrated]);
 
   const counters = useMemo(
     () => computePoolCounters(state, minions),
     [state, minions]
   );
+
+  // Vor Hydration: Skeleton rendern, kein leeres Board zeigen (vermeidet Flicker)
+  if (!hydrated) {
+    return (
+      <p className="lead" role="status" aria-live="polite">
+        Lade gespeichertes Spiel…
+      </p>
+    );
+  }
 
   function reset() {
     if (confirm("Aktuelles Spiel zurücksetzen?")) {
@@ -75,16 +85,18 @@ export default function PoolCounterClient() {
     setState((s) => {
       const existing = s.board.find((b) => b.minionId === minionId && !b.golden);
       if (existing) {
-        const newCopies = existing.copies + 1;
+        // Defense: falls existing.copies bereits >= 3 ist (korrupter State),
+        // clampen statt auf copies: 4 zu gehen — direkt zu Golden konvertieren.
+        const newCopies = Math.max(existing.copies + 1, 3);
         if (newCopies >= 3) {
-          // Triple! Wird zu goldenem Minion
-          const others = s.board.filter((b) => b !== existing);
+          // Triple! Entferne ALLE non-golden Einträge dieses Minions, damit kein
+          // copies: 4 Straggler zurückbleibt, dann zu golden konvertieren.
+          const others = s.board.filter(
+            (b) => !(b.minionId === minionId && !b.golden)
+          );
           return {
             ...s,
-            board: [
-              ...others,
-              { minionId, golden: true, copies: 1 },
-            ],
+            board: [...others, { minionId, golden: true, copies: 1 }],
           };
         }
         return {
@@ -156,7 +168,11 @@ export default function PoolCounterClient() {
                 <div className="board-stats">
                   {b.golden ? "×2" : `×${b.copies}`} · {minion.attack}/{minion.health}
                 </div>
-                <button onClick={() => removeBoardMinion(i)} className="btn-tiny">
+                <button
+                  onClick={() => removeBoardMinion(i)}
+                  className="btn-tiny"
+                  aria-label={`Entfernen ${minion.name}`}
+                >
                   ×
                 </button>
               </div>
@@ -332,6 +348,7 @@ function ShopOfferedEditor({
               }
               className="btn-tiny"
               style={{ marginLeft: "0.3rem" }}
+              aria-label={`Entfernen ${m?.name ?? id}`}
             >
               ×
             </button>

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -18,11 +19,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <span className="brand-name">Coach</span>
             </a>
             <nav className="nav">
-              <a href="/anomalies">Anomalien</a>
-              <a href="/quests">Quests</a>
-              <a href="/heroes">Heroes</a>
-              <a href="/pool">Pool-Counter</a>
-              <a href="/triple-ev">Triple-EV</a>
+              <Link href="/anomalies">Anomalien</Link>
+              <Link href="/quests">Quests</Link>
+              <Link href="/heroes">Heroes</Link>
+              <Link href="/pool">Pool-Counter</Link>
+              <Link href="/triple-ev">Triple-EV</Link>
             </nav>
           </div>
         </header>

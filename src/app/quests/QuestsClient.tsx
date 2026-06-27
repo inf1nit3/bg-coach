@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react";
 import { getAllQuests } from "@/lib/quests";
 import { getQuestWinrate, WINRATE_META } from "@/lib/winrates";
-import { ALL_TRIBES, type Tier } from "@/lib/types";
+import { ALL_TRIBES, type Tier, type Tribe } from "@/lib/types";
 
 const TIERS: Tier[] = ["S", "A", "B", "C", "D"];
 const QUESTS = getAllQuests().map((q) => {
@@ -16,13 +16,13 @@ const QUESTS = getAllQuests().map((q) => {
 });
 
 export default function QuestsClient() {
-  const [tribeFilter, setTribeFilter] = useState<string>("All");
+  const [tribeFilter, setTribeFilter] = useState<Tribe | "All">("All");
   const [tierFilter, setTierFilter] = useState<Tier | "all">("all");
   const [search, setSearch] = useState("");
 
   const filtered = useMemo(() => {
     return QUESTS.filter((q) => {
-      if (tribeFilter !== "All" && !q.favoredTribes.includes(tribeFilter as never)) {
+      if (tribeFilter !== "All" && !q.favoredTribes.includes(tribeFilter)) {
         return false;
       }
       if (tierFilter !== "all" && q.tier !== tierFilter) {
@@ -48,7 +48,7 @@ export default function QuestsClient() {
         <select
           className="filter-select"
           value={tribeFilter}
-          onChange={(e) => setTribeFilter(e.target.value)}
+          onChange={(e) => setTribeFilter(e.target.value as Tribe | "All")}
         >
           <option value="All">Alle Tribes</option>
           {ALL_TRIBES.filter((t) => t !== "All").map((t) => (

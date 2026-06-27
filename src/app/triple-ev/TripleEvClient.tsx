@@ -53,12 +53,11 @@ export default function TripleEvClient() {
     return computeTripleEV({
       tavernTier,
       pairMinion: selectedPair.minion,
-      boardStrength,
       compTribeLocked,
       anomalyBoostsTriple,
       discoverTierBonus,
     });
-  }, [selectedPair, tavernTier, boardStrength, compTribeLocked, anomalyBoostsTriple, discoverTierBonus]);
+  }, [selectedPair, tavernTier, compTribeLocked, anomalyBoostsTriple, discoverTierBonus]);
 
   function addPairMinion(minionId: string) {
     setBoard((b) => {
@@ -102,7 +101,11 @@ export default function TripleEvClient() {
                 <div className="board-stats">
                   {b.golden ? "×2" : `×${b.copies}`} · {m.attack}/{m.health}
                 </div>
-                <button onClick={() => removeAt(i)} className="btn-tiny">
+                <button
+                  onClick={() => removeAt(i)}
+                  className="btn-tiny"
+                  aria-label={`Entfernen ${m.name}`}
+                >
                   ×
                 </button>
               </div>
@@ -243,13 +246,40 @@ export default function TripleEvClient() {
                   <summary style={{ cursor: "pointer", color: "var(--text-dim)" }}>
                     Berechnung anzeigen
                   </summary>
-                  <pre className="triple-formula">
-{`Pair: ${selectedPair.minion.name} (${selectedPair.minion.attack}/${selectedPair.minion.health})
-Golden: ${selectedPair.minion.attack * 2 + 1}/${selectedPair.minion.health * 2 + 1}
-Board-Strength-Beitrag (Hold): ${selectedPair.minion.attack + selectedPair.minion.health}
-Triple-EV: Golden (${(selectedPair.minion.attack * 2 + 1) + (selectedPair.minion.health * 2 + 1)}) + Discover T${result.discoverTier} (${(result.evTriple - ((selectedPair.minion.attack * 2 + 1) + (selectedPair.minion.health * 2 + 1))).toFixed(1)})${anomalyBoostsTriple ? " + Anomalie-Bonus (+3)" : ""}
-Δ = ${result.evTriple.toFixed(1)} − ${result.evHold.toFixed(1)} = ${result.delta.toFixed(1)}`}
-                  </pre>
+                  <dl className="triple-formula">
+                    <dt>Pair</dt>
+                    <dd>
+                      {selectedPair.minion.name} ({selectedPair.minion.attack}/
+                      {selectedPair.minion.health})
+                    </dd>
+                    <dt>Golden</dt>
+                    <dd>
+                      {selectedPair.minion.attack * 2 + 1}/
+                      {selectedPair.minion.health * 2 + 1}
+                    </dd>
+                    <dt>Board-Strength-Beitrag (Hold)</dt>
+                    <dd>
+                      {selectedPair.minion.attack + selectedPair.minion.health}
+                    </dd>
+                    <dt>Triple-EV: Golden</dt>
+                    <dd>
+                      ({selectedPair.minion.attack * 2 + 1} +
+                      {selectedPair.minion.health * 2 + 1}) + Discover T
+                      {result.discoverTier} (
+                      {(
+                        result.evTriple -
+                        (selectedPair.minion.attack * 2 + 1) -
+                        (selectedPair.minion.health * 2 + 1)
+                      ).toFixed(1)}
+                      )
+                      {anomalyBoostsTriple ? " + Anomalie-Bonus (+3)" : ""}
+                    </dd>
+                    <dt>Δ</dt>
+                    <dd>
+                      {result.evTriple.toFixed(1)} − {result.evHold.toFixed(1)} ={" "}
+                      {result.delta.toFixed(1)}
+                    </dd>
+                  </dl>
                 </details>
               </div>
             )}
