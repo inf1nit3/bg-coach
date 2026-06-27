@@ -38,7 +38,7 @@ export interface ShopLogEntry {
 export interface PoolCounterState {
   hero: string;
   /** Aktuelles Tavern-Tier. */
-  tavernTier: 1 | 2 | 3 | 4 | 5 | 6;
+  tavernTier: 1 | 2 | 3 | 4 | 5 | 6 | 7;
   /** Aktuelle Runde. */
   turn: number;
   /** Spieler-Board. */

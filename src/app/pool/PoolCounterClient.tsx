@@ -123,13 +123,13 @@ export default function PoolCounterClient() {
           value={state.tavernTier}
           onChange={(e) =>
             setState((s) => ({
-              ...s,
-              tavernTier: Number(e.target.value) as 1 | 2 | 3 | 4 | 5 | 6,
-            }))
+            ...s,
+            tavernTier: Number(e.target.value) as 1 | 2 | 3 | 4 | 5 | 6 | 7,
+          }))
           }
           className="filter-select"
         >
-          {[1, 2, 3, 4, 5, 6].map((t) => (
+          {[1, 2, 3, 4, 5, 6, 7].map((t) => (
             <option key={t} value={t}>
               Tier {t}
             </option>
