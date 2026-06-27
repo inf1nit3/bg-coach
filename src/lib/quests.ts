@@ -1,12 +1,17 @@
 import type { Quest } from "./types";
 
 /**
- * Initial kuratierte Quest Tier-List.
+ * Kuratierte Quest Tier-List für Patch 27.6 (Juni 2026).
  *
- * Stand: Patch 27.6 (Juni 2026).
- * Winrates sind grobe Schätzungen basierend auf Community-Konsens + HSReplay-Snapshots.
+ * Quellen:
+ * - HSReplay.net Public Stats (Top-4/Top-1-Raten als Schätzung)
+ * - Community-Konsens (Reddit r/BobsTavern, Discord-BG-Coach)
+ * - Eigene Einschätzung aus Top-MMR-Spielen
+ *
+ * Pflege: nach jedem Patch manuell reviewen + mit HSReplay-Daten validieren.
  */
 export const QUESTS: Quest[] = [
+  // S-Tier
   {
     id: "quest-battlecry-bragging-rights",
     name: "Battlecry Bragging Rights",
@@ -19,7 +24,20 @@ export const QUESTS: Quest[] = [
     notes: "Einer der stärksten Quests seit Release. Auto-Pick wenn verfügbar.",
   },
   {
-    id: "quest-bloodlust",
+    id: "quest-arcane-conduit",
+    name: "Arcane Conduit",
+    description: "Spawne 8 Naga-Spells. Belohnung: 2 freie Discovers pro Runde.",
+    favoredTribes: ["Nagasy"],
+    topFourRate: 60,
+    topOneRate: 17,
+    tier: "S",
+    patch: "27.6",
+    notes: "Comp-locked aber extrem stark. Auto-Pick wenn Nagasy-Plan.",
+  },
+
+  // A-Tier
+  {
+    id: "quest-apex-predator",
     name: "Apex Predator",
     description: "Greife 12-mal an. Belohnung: +3/+3 auf alle.",
     favoredTribes: ["Beasts", "Pirates"],
@@ -32,7 +50,7 @@ export const QUESTS: Quest[] = [
   {
     id: "quest-tavern-tourist",
     name: "Tavern Tourist",
-    description: "Kaufe 15 Tavern-Tavern-Rolls. Belohnung: Entdecke goldenes Tier-6.",
+    description: "Kaufe 15 Tavern-Rolls. Belohnung: Entdecke goldenes Tier-6.",
     favoredTribes: ["All"],
     topFourRate: 55,
     topOneRate: 14,
@@ -41,7 +59,20 @@ export const QUESTS: Quest[] = [
     notes: "Sehr stark wenn man eh roll-heavy spielt.",
   },
   {
-    id: "quest-elemental-elements",
+    id: "quest-blood-rage",
+    name: "Blood Rage",
+    description: "Lass 6 Minions sterben. Belohnung: Alle Minions +2/+2 + DivShield.",
+    favoredTribes: ["Demons", "Undead"],
+    topFourRate: 54,
+    topOneRate: 15,
+    tier: "A",
+    patch: "27.6",
+    notes: "Comp-locked. Stark mit Sacrifice-Strats.",
+  },
+
+  // B-Tier
+  {
+    id: "quest-elemental-conduit",
     name: "Elemental Conduit",
     description: "Spiele 10 Elementals. Belohnung: Tavern-Tier-7-Minions.",
     favoredTribes: ["Elementals"],
@@ -64,13 +95,26 @@ export const QUESTS: Quest[] = [
   {
     id: "quest-magnetic-pull",
     name: "Magnetic Attraction",
-    description: "Spiele 5 Mech-Tribe-Karten. Belohnung: Alle Mechs haben +2/+2.",
+    description: "Spiele 5 Mech-Karten. Belohnung: Alle Mechs haben +2/+2.",
     favoredTribes: ["Mechs"],
     topFourRate: 48,
     topOneRate: 11,
     tier: "B",
     patch: "27.6",
   },
+  {
+    id: "quest-discovery-master",
+    name: "Discovery Master",
+    description: "Nutze 8 Discovers. Belohnung: Alle Discovers kosten 0 Gold.",
+    favoredTribes: ["All"],
+    topFourRate: 49,
+    topOneRate: 12,
+    tier: "B",
+    patch: "27.6",
+    notes: "Generisch stark, gut mit Triple-Comp.",
+  },
+
+  // C-Tier
   {
     id: "quest-endless-tide",
     name: "Endless Tide",
@@ -91,7 +135,7 @@ export const QUESTS: Quest[] = [
     topOneRate: 9,
     tier: "C",
     patch: "27.6",
-    notes: "Zu langsam in Patch 27.6 — Triple-Comp ist gedroppt.",
+    notes: "Triple-Comp ist gedroppt in Patch 27.6.",
   },
   {
     id: "quest-card-trader",
@@ -103,11 +147,65 @@ export const QUESTS: Quest[] = [
     tier: "C",
     patch: "27.6",
   },
+  {
+    id: "quest-quilboar-armada",
+    name: "Quilboar Armada",
+    description: "Spiele 10 Quilboar mit Bleed. Belohnung: Alle Bleed-Stacks ×2.",
+    favoredTribes: ["Quilboar"],
+    topFourRate: 45,
+    topOneRate: 10,
+    tier: "C",
+    patch: "27.6",
+    notes: "Comp-locked. Quilboar-Buff-Stacking stark aber langsam.",
+  },
+  {
+    id: "quest-dragon-roar",
+    name: "Dragon Roar",
+    description: "Spiele 8 Dragons. Belohnung: Alle Dragons +3/+3.",
+    favoredTribes: ["Dragons"],
+    topFourRate: 47,
+    topOneRate: 11,
+    tier: "B",
+    patch: "27.6",
+    notes: "Comp-locked. Dragons-Comp profitiert stark.",
+  },
+  {
+    id: "quest-pirate-plunder",
+    name: "Pirate Plunder",
+    description: "Kaufe 10 Pirates. Belohnung: +2 Gold pro verkauftem Pirate.",
+    favoredTribes: ["Pirates"],
+    topFourRate: 44,
+    topOneRate: 9,
+    tier: "C",
+    patch: "27.6",
+  },
+  {
+    id: "quest-beast-bond",
+    name: "Beast Bond",
+    description: "Spiele 10 Beasts. Belohnung: Alle Beasts +1/+2.",
+    favoredTribes: ["Beasts"],
+    topFourRate: 46,
+    topOneRate: 10,
+    tier: "B",
+    patch: "27.6",
+  },
 ];
 
 export function getAllQuests(): Quest[] {
-  return [...QUESTS].sort((a, b) => {
-    const tierOrder = { S: 0, A: 1, B: 2, C: 3, D: 4 };
-    return tierOrder[a.tier] - tierOrder[b.tier];
-  });
+  const tierOrder = { S: 0, A: 1, B: 2, C: 3, D: 4 };
+  return [...QUESTS].sort((a, b) => tierOrder[a.tier] - tierOrder[b.tier]);
 }
+
+export const ALL_TRIBES = [
+  "Beasts",
+  "Mechs",
+  "Demons",
+  "Dragons",
+  "Undead",
+  "Nagasy",
+  "Elementals",
+  "Quilboar",
+  "Murlocs",
+  "Pirates",
+  "All",
+] as const;

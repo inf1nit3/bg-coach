@@ -31,11 +31,13 @@ export default function Home() {
           </p>
         </div>
         <div className="feature">
-          <span className="feature-status feature-status-soon">○ Bald</span>
-          <div className="feature-title">Pool-Counter</div>
+          <span className="feature-status feature-status-live">● Live</span>
+          <div className="feature-title">
+            <Link href="/pool">Pool-Counter</Link>
+          </div>
           <p className="card-desc">
             Manuelle Eingabe deiner Drafts/Sells — Tool trianguliert wie viele
-            Minions noch im Pool sind.
+            Minions noch im Pool sind. LocalStorage-Speicherung.
           </p>
         </div>
         <div className="feature">
