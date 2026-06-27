@@ -161,6 +161,15 @@ export default function PoolCounterClient() {
             if (!minion) return null;
             return (
               <div key={i} className={`board-card ${b.golden ? "golden" : ""}`}>
+                {minion.picture && (
+                  <img
+                    src={minion.picture}
+                    alt={minion.name}
+                    width={32}
+                    height={32}
+                    className="minion-icon"
+                  />
+                )}
                 <div className="board-name">
                   {minion.name}
                   {b.golden && " ⭐"}

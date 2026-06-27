@@ -412,6 +412,21 @@ h2 {
   gap: 0.75rem;
   margin-bottom: 0.5rem;
 }
+.card-art {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.minion-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  object-fit: cover;
+  display: block;
+  margin-bottom: 0.3rem;
+}
 .card-title {
   font-size: 1.05rem;
   font-weight: 600;

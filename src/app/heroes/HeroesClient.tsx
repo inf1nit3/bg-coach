@@ -120,6 +120,15 @@ export default function HeroesClient() {
         {filtered.map((h) => (
           <article key={h.id} className={`card ${!h.hasTierEntry ? "card-dim" : ""}`}>
             <div className="card-head">
+              {h.picture && (
+                <img
+                  src={h.picture}
+                  alt={h.name}
+                  width={56}
+                  height={56}
+                  className="card-art"
+                />
+              )}
               <div className="card-title">
                 {h.name}
                 {h.nameShort && (

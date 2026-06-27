@@ -94,6 +94,15 @@ export default function TripleEvClient() {
             if (!m) return null;
             return (
               <div key={i} className={`board-card ${b.golden ? "golden" : ""}`}>
+                {m.picture && (
+                  <img
+                    src={m.picture}
+                    alt={m.name}
+                    width={32}
+                    height={32}
+                    className="minion-icon"
+                  />
+                )}
                 <div className="board-name">
                   {m.name}
                   {b.golden && " ⭐"}
