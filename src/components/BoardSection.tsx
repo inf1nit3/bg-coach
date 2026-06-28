@@ -83,7 +83,7 @@ export function BoardSection({
             Minion wählen…
           </option>
           {minions
-            .filter((m) => m.tier <= tavernTier)
+            .filter((m) => m.tier === tavernTier)
             .map((m) => (
               <option key={m.id} value={m.id}>
                 T{m.tier} · {m.name} ({m.attack}/{m.health})
