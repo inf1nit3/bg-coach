@@ -39,17 +39,31 @@ export default function AnomaliesClient() {
     });
   }, [tribeFilter, mmrFilter, search]);
 
+  function resetFilters() {
+    setTribeFilter("All");
+    setMmrFilter("all");
+    setSearch("");
+  }
+
   return (
     <>
-      <div className="filter-bar">
+      <div className="filter-bar" role="search" aria-label="Anomalie-Filter">
+        <label className="sr-only" htmlFor="anomalies-search">
+          Anomalie suchen
+        </label>
         <input
+          id="anomalies-search"
           type="text"
           placeholder="Anomalie suchen…"
           className="filter-input"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
+        <label className="sr-only" htmlFor="anomalies-tribe">
+          Tribe filtern
+        </label>
         <select
+          id="anomalies-tribe"
           className="filter-select"
           value={tribeFilter}
           onChange={(e) => setTribeFilter(e.target.value as Tribe | "All")}
@@ -61,7 +75,11 @@ export default function AnomaliesClient() {
             </option>
           ))}
         </select>
+        <label className="sr-only" htmlFor="anomalies-mmr">
+          MMR-Bucket filtern
+        </label>
         <select
+          id="anomalies-mmr"
           className="filter-select"
           value={mmrFilter}
           onChange={(e) => setMmrFilter(e.target.value as MMRBucket | "all")}
@@ -73,7 +91,7 @@ export default function AnomaliesClient() {
             </option>
           ))}
         </select>
-        <span className="filter-count">
+        <span className="filter-count" aria-live="polite">
           {filtered.length} / {ANOMALIES.length}
         </span>
       </div>
@@ -137,7 +155,22 @@ export default function AnomaliesClient() {
       </div>
 
       {filtered.length === 0 && (
-        <p className="lead">Keine Anomalien passen zum Filter.</p>
+        <div className="empty-state" role="status" aria-live="polite">
+          <p className="lead" style={{ marginBottom: "0.5rem" }}>
+            Keine Anomalien passen zum aktuellen Filter.
+          </p>
+          <p className="text-dim" style={{ marginBottom: "1rem" }}>
+            MMR-Notizen liegen nur für ausgewählte Anomalien vor — lockere die
+            Filter, um alle zu sehen.
+          </p>
+          <button
+            onClick={resetFilters}
+            className="btn-primary"
+            style={{ fontSize: "0.9rem", padding: "0.5rem 1rem" }}
+          >
+            Filter zurücksetzen
+          </button>
+        </div>
       )}
     </>
   );

@@ -12,6 +12,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="de">
       <body>
+        <a href="#main-content" className="skip-link">
+          Zum Inhalt springen
+        </a>
         <header className="site-header">
           <div className="container header-inner">
             <Link href="/" className="brand" aria-label="BG Coach Home">
@@ -27,7 +30,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </nav>
           </div>
         </header>
-        <main className="container main">{children}</main>
+        <main id="main-content" className="container main" tabIndex={-1}>
+          {children}
+        </main>
         <footer className="site-footer">
           <div className="container">
             <p>

@@ -9,6 +9,10 @@ export default function Home() {
         keine Overlay-Spielerei, kein Auto-Pilot. Skill-Tool, kein Cheat.
       </p>
 
+      <p className="trust-strip" role="note">
+        Skill-Tool, kein Overlay, kein Auto-Pilot — Daten bleiben im Browser.
+      </p>
+
       <div className="feature-grid">
         <div className="feature">
           <span className="feature-status feature-status-live">● Live</span>

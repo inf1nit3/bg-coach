@@ -60,16 +60,31 @@ export function BoardSection({
             );
           })}
           {board.length === 0 && (
-            <p className="lead" style={{ gridColumn: "1 / -1" }}>
-              Board ist leer. Füge unten Minions hinzu.
-            </p>
+            <div
+              className="empty-state"
+              role="status"
+              aria-live="polite"
+              style={{ gridColumn: "1 / -1" }}
+            >
+              <p className="lead" style={{ marginBottom: "0.5rem" }}>
+                Board ist leer.
+              </p>
+              <p className="text-dim">
+                ↓ Wähle unten ein Minion, um dein Board aufzubauen.
+              </p>
+            </div>
           )}
         </div>
       </section>
 
       <section>
-        <h2>Minion hinzufügen</h2>
+        <h2 id="board-add-heading">Minion hinzufügen</h2>
+        <label className="sr-only" htmlFor="board-add-select">
+          Minion wählen
+        </label>
         <select
+          id="board-add-select"
+          aria-labelledby="board-add-heading"
           onChange={(e) => {
             if (e.target.value) {
               addBoardMinion(e.target.value);

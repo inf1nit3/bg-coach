@@ -34,15 +34,27 @@ export function HeroFilterBar({
   totalCount,
 }: HeroFilterBarProps) {
   return (
-    <div className="filter-bar">
+    <div
+      className="filter-bar"
+      role="search"
+      aria-label="Hero-Filter"
+    >
+      <label className="sr-only" htmlFor="heroes-search">
+        Hero suchen
+      </label>
       <input
+        id="heroes-search"
         type="text"
         placeholder="Hero suchen…"
         className="filter-input"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
+      <label className="sr-only" htmlFor="heroes-tribe">
+        Tribe filtern
+      </label>
       <select
+        id="heroes-tribe"
         className="filter-select"
         value={tribeFilter}
         onChange={(e) => setTribeFilter(e.target.value)}
@@ -54,7 +66,11 @@ export function HeroFilterBar({
           </option>
         ))}
       </select>
+      <label className="sr-only" htmlFor="heroes-mmr">
+        MMR-Bucket filtern
+      </label>
       <select
+        id="heroes-mmr"
         className="filter-select"
         value={mmrFilter}
         onChange={(e) => setMmrFilter(e.target.value as MMRBucket | "all")}
@@ -66,7 +82,11 @@ export function HeroFilterBar({
           </option>
         ))}
       </select>
+      <label className="sr-only" htmlFor="heroes-tier">
+        Tier filtern
+      </label>
       <select
+        id="heroes-tier"
         className="filter-select"
         value={tierFilter}
         onChange={(e) => setTierFilter(e.target.value as Tier | "all")}
@@ -78,7 +98,7 @@ export function HeroFilterBar({
           </option>
         ))}
       </select>
-      <span className="filter-count">
+      <span className="filter-count" aria-live="polite">
         {filteredCount} / {totalCount}
       </span>
     </div>

@@ -37,15 +37,23 @@ export default function QuestsClient() {
 
   return (
     <>
-      <div className="filter-bar">
+      <div className="filter-bar" role="search" aria-label="Quest-Filter">
+        <label className="sr-only" htmlFor="quests-search">
+          Quest suchen
+        </label>
         <input
+          id="quests-search"
           type="text"
           placeholder="Quest suchen…"
           className="filter-input"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
+        <label className="sr-only" htmlFor="quests-tribe">
+          Tribe filtern
+        </label>
         <select
+          id="quests-tribe"
           className="filter-select"
           value={tribeFilter}
           onChange={(e) => setTribeFilter(e.target.value as Tribe | "All")}
@@ -57,7 +65,11 @@ export default function QuestsClient() {
             </option>
           ))}
         </select>
+        <label className="sr-only" htmlFor="quests-tier">
+          Tier filtern
+        </label>
         <select
+          id="quests-tier"
           className="filter-select"
           value={tierFilter}
           onChange={(e) => setTierFilter(e.target.value as Tier | "all")}
@@ -69,7 +81,7 @@ export default function QuestsClient() {
             </option>
           ))}
         </select>
-        <span className="filter-count">
+        <span className="filter-count" aria-live="polite">
           {filtered.length} / {QUESTS.length}
         </span>
       </div>
@@ -119,7 +131,17 @@ export default function QuestsClient() {
         ))}
       </div>
 
-      {filtered.length === 0 && <p className="lead">Keine Quests passen zum Filter.</p>}
+      {filtered.length === 0 && (
+        <div className="empty-state" role="status" aria-live="polite">
+          <p className="lead" style={{ marginBottom: "0.5rem" }}>
+            Keine Quests passen zum aktuellen Filter.
+          </p>
+          <p className="text-dim">
+            Versuche, Tribe- oder Tier-Filter zu lockern, um alle Quests zu
+            sehen.
+          </p>
+        </div>
+      )}
 
       <h2>Hinweis zu den Winrates</h2>
       <p className="lead">

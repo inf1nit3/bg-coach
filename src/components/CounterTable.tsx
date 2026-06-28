@@ -30,8 +30,20 @@ export function CounterTable({ counters }: CounterTableProps) {
             <div>{c.playerHas}</div>
             <div>
               <strong>{c.estimatedRemaining}</strong>
-              {c.status === "red" && " ⚠"}
-              {c.status === "yellow" && " ⚡"}
+              {c.status === "red" && (
+                <>
+                  {" "}
+                  <span aria-hidden="true">⚠</span>
+                  <span className="sr-only">Wahrscheinlich ausverkauft</span>
+                </>
+              )}
+              {c.status === "yellow" && (
+                <>
+                  {" "}
+                  <span aria-hidden="true">⚡</span>
+                  <span className="sr-only">Knapp</span>
+                </>
+              )}
             </div>
           </div>
         ))}

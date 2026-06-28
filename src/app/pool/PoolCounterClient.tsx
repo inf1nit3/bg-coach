@@ -29,7 +29,11 @@ export default function PoolCounterClient() {
   return (
     <>
       <div className="pool-meta">
+        <label className="sr-only" htmlFor="pool-hero-input">
+          Hero
+        </label>
         <input
+          id="pool-hero-input"
           type="text"
           placeholder="Hero"
           value={state.hero}
@@ -37,7 +41,11 @@ export default function PoolCounterClient() {
           className="filter-input"
           style={{ maxWidth: 180 }}
         />
+        <label className="sr-only" htmlFor="pool-tavern-select">
+          Tavern-Tier
+        </label>
         <select
+          id="pool-tavern-select"
           value={state.tavernTier}
           onChange={(e) =>
             setState((s) => ({
@@ -53,7 +61,9 @@ export default function PoolCounterClient() {
             </option>
           ))}
         </select>
-        <span className="winrate">Runde: {state.turn}</span>
+        <span className="winrate" aria-label={`Aktuelle Runde ${state.turn}`}>
+          Runde: {state.turn}
+        </span>
         <button onClick={reset} className="btn-danger">
           Reset
         </button>

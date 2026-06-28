@@ -122,9 +122,20 @@ export default function TripleEvClient() {
             );
           })}
           {board.length === 0 && (
-            <p className="lead" style={{ gridColumn: "1 / -1" }}>
-              Füge unten 2+ Kopien desselben Minions hinzu (= ein Paar), um eine Empfehlung zu sehen.
-            </p>
+            <div
+              className="empty-state"
+              role="status"
+              aria-live="polite"
+              style={{ gridColumn: "1 / -1" }}
+            >
+              <p className="lead" style={{ marginBottom: "0.5rem" }}>
+                Noch kein Board — du testest, ob sich ein Triple jetzt lohnt.
+              </p>
+              <p className="text-dim" style={{ fontSize: "0.95rem" }}>
+                ↓ Wähle unten ein Minion und füge 2 Kopien hinzu, um eine
+                Empfehlung zu sehen.
+              </p>
+            </div>
           )}
         </div>
         <button onClick={clearBoard} className="btn-danger">
@@ -133,8 +144,13 @@ export default function TripleEvClient() {
       </section>
 
       <section>
-        <h2>Minion hinzufügen (für Paar-Test)</h2>
+        <h2 id="triple-add-heading">Minion hinzufügen (für Paar-Test)</h2>
+        <label className="sr-only" htmlFor="triple-add-select">
+          Minion wählen
+        </label>
         <select
+          id="triple-add-select"
+          aria-labelledby="triple-add-heading"
           onChange={(e) => {
             if (e.target.value) {
               addPairMinion(e.target.value);
@@ -215,8 +231,7 @@ export default function TripleEvClient() {
             <select
               value={pairSelection}
               onChange={(e) => setPairSelection(e.target.value)}
-              className="filter-select"
-              style={{ marginBottom: "1rem" }}
+              className="filter-select pair-select"
             >
               {pairs.map((p) => (
                 <option key={p.minion.id} value={p.minion.id}>
@@ -308,7 +323,7 @@ export default function TripleEvClient() {
         <p className="lead">
           <strong>Was das Modell NICHT berücksichtigt</strong>:
         </p>
-        <ul style={{ paddingLeft: "1.5rem", color: "var(--text-dim)", lineHeight: 1.7 }}>
+        <ul className="caveats">
           <li>Lobby-Comp-Density (wie viele andere Spieler denselben Tribe spielen)</li>
           <li>Board-Order / Deathrattle-Chain-Risiken</li>
           <li>Z-Spell-Comp-Synergien (Soul-Juggler etc.)</li>
